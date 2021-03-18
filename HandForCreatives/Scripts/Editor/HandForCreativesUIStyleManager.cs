@@ -7,13 +7,13 @@ namespace SquareDino.HandForCreatives
 {
     public class HandForCreativesUIStyleManager : MonoBehaviour
     {
-        public static HandView handView;
+        public static GameObject handView;
 
         static HandForCreativesUIStyleManager()
         {
             var tmproAssetFolderPath = HandForCreativesEditorUtility.packageRelativePath;
 
-            handView = AssetDatabase.LoadAssetAtPath(tmproAssetFolderPath + "/Editor Resources/HandView", typeof(HandView)) as HandView;
+            handView = AssetDatabase.LoadAssetAtPath(tmproAssetFolderPath + "/Editor Resources/HandView", typeof(GameObject)) as GameObject;
         }
     }
 }
