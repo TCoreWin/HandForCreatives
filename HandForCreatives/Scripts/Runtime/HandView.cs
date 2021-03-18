@@ -5,18 +5,19 @@ namespace SquareDino.HFC
 {
     public class HandView : MonoBehaviour
     {
-        private Camera mainCamera;
         private Sprite _handIdleIcon;
         private Sprite _handClickIcon;
+        
         private Image _image;
         private RectTransform _rectTransform;
         
         private void Awake()
         {
-            mainCamera = Camera.main;
             _image = gameObject.AddComponent<Image>();
-            _rectTransform = GetComponent<RectTransform>();
             _image.preserveAspect = true;
+            
+            _rectTransform = GetComponent<RectTransform>();
+            _rectTransform.pivot = new Vector2(0.3f, .85f);
         }
 
         public void Init(Sprite handIdleIcon, Sprite handClickIcon)
@@ -24,14 +25,23 @@ namespace SquareDino.HFC
             _handIdleIcon = handIdleIcon;
             _handClickIcon = handClickIcon;
 
-            _image.sprite = _handIdleIcon;
-            var bounds = _handIdleIcon.bounds;
-            _rectTransform.pivot = mainCamera.ScreenToWorldPoint(_handIdleIcon.pivot);
+            ChangeSprite(_handIdleIcon);
+        }
+
+        private void ChangeSprite(Sprite sprite)
+        {
+            _image.sprite = sprite;
         }
         
         private void Update()
         {
             transform.position = Input.mousePosition;
+
+            if (Input.GetMouseButtonDown(0))
+                ChangeSprite(_handClickIcon);
+            
+            if (Input.GetMouseButtonUp(0))
+                ChangeSprite(_handIdleIcon);
         }
     }
 }
