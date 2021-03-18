@@ -25,7 +25,8 @@ namespace SquareDino.HFC
             _handClickIcon = handClickIcon;
 
             _image.sprite = _handIdleIcon;
-            _rectTransform.pivot = _handIdleIcon.pivot;
+            var bounds = _handIdleIcon.bounds;
+            _rectTransform.pivot = new Vector2(bounds.center.x / bounds.extents.x / 2 + 0.5f, bounds.center.y / bounds.extents.y / 2 + 0.5f);
         }
         
         private void Update()
