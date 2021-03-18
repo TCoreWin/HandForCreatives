@@ -60,14 +60,17 @@ namespace SquareDino.HFC
 
         private void SpawnHand()
         {
-            var canvas = new GameObject("HandCanvas");
-            var mouseIcon = new GameObject("MouseIcon");
+            var canvasGO = new GameObject("HandCanvas");
+            var mouseIconGO = new GameObject("MouseIcon");
             
             Debug.Log(HandForCreativesUIStyleManager.hand_idle);
             
-            canvas.AddComponent<Canvas>();
+            var canvas = canvasGO.AddComponent<Canvas>();
+            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
             
-            var handView = mouseIcon.AddComponent<HandView>();
+            var handView = mouseIconGO.AddComponent<HandView>();
+            handView.transform.SetParent(canvas.transform);
+            handView.Init(HandForCreativesUIStyleManager.hand_idle, HandForCreativesUIStyleManager.hand_click);
         }
 
         private void OnDisable()
