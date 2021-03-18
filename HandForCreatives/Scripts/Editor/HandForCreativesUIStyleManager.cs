@@ -13,7 +13,7 @@ namespace SquareDino.HandForCreatives
         {
             var tmproAssetFolderPath = HandForCreativesEditorUtility.packageRelativePath;
 
-            handView = AssetDatabase.LoadAssetAtPath(tmproAssetFolderPath + "/Editor Resources/Textures/btn_AlignLeft.psd", typeof(HandView)) as HandView;
+            handView = AssetDatabase.LoadAssetAtPath(tmproAssetFolderPath + "/Editor Resources/HandView", typeof(HandView)) as HandView;
         }
     }
 }
