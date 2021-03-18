@@ -10,42 +10,53 @@ namespace SquareDino.HFC
     {
         private static bool enable;
         private const string enableKey = "enableHandForCreativesKey";
-    
+
+        private Color _color = Color.white;
+        private float sizeMultiply = 1f;
+        
         [MenuItem("Window/SquareDino/HandForCreatives")]
         static void Init()
         {
             HandForCreatives window = (HandForCreatives) GetWindow(typeof(HandForCreatives), false, "HandForCreatives", true);
-            window.maxSize = new Vector2(300f, 65f);
+            window.maxSize = new Vector2(300f, 120f);
             window.minSize = window.maxSize;
         }
         
         private void OnGUI()
         {
             GUILayout.BeginHorizontal("box");
+                EditorGUILayout.LabelField("Icon color", GUILayout.Width(90));
+                _color = EditorGUILayout.ColorField(_color);
+            GUILayout.EndHorizontal();
+
+            GUILayout.BeginHorizontal("box");
+                EditorGUILayout.LabelField("Size multiply", GUILayout.Width(90));
+                sizeMultiply = EditorGUILayout.FloatField(sizeMultiply);
+            GUILayout.EndHorizontal();
             
-            GUI.enabled = !enable;
             
-            if (GUILayout.Button("Enable contrast", GUILayout.Height(50)))
-            {    
-                enable = true;    
-                EditorPrefs.SetInt(enableKey, 1);
-            }   
-            
-            GUI.enabled = enable;
-            
-            if (GUILayout.Button("Disable contrast", GUILayout.Height(50)))
-            {
-                enable = false;
-                EditorPrefs.SetInt(enableKey, 0);
-            } 
-            
+            GUILayout.BeginHorizontal("box");
+                GUI.enabled = !enable;
+                
+                if (GUILayout.Button("Enable", GUILayout.Height(50)))
+                {    
+                    enable = true;    
+                    EditorPrefs.SetInt(enableKey, 1);
+                }   
+                
+                GUI.enabled = enable;
+                
+                if (GUILayout.Button("Disable", GUILayout.Height(50)))
+                {
+                    enable = false;
+                    EditorPrefs.SetInt(enableKey, 0);
+                } 
             GUILayout.EndHorizontal();
         }
         
         private void OnEnable()
         {
             enable = EditorPrefs.GetInt(enableKey, 0) == 1;
-            Debug.Log(enable);
             
             SceneManager.sceneLoaded -= SceneLoaded;
             SceneManager.sceneLoaded += SceneLoaded;
@@ -63,14 +74,12 @@ namespace SquareDino.HFC
             var canvasGO = new GameObject("HandCanvas");
             var mouseIconGO = new GameObject("MouseIcon");
             
-            Debug.Log(HandForCreativesUIStyleManager.hand_idle);
-            
             var canvas = canvasGO.AddComponent<Canvas>();
             canvas.renderMode = RenderMode.ScreenSpaceOverlay;
             
             var handView = mouseIconGO.AddComponent<HandView>();
             handView.transform.SetParent(canvas.transform);
-            handView.Init(HandForCreativesUIStyleManager.hand_idle, HandForCreativesUIStyleManager.hand_click);
+            handView.Init(HandForCreativesUIStyleManager.hand_idle, HandForCreativesUIStyleManager.hand_click, _color, sizeMultiply);
         }
 
         private void OnDisable()
