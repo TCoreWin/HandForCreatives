@@ -26,7 +26,7 @@ namespace SquareDino.HFC
 
             _image.sprite = _handIdleIcon;
             var bounds = _handIdleIcon.bounds;
-            _rectTransform.pivot = new Vector2(bounds.center.x / bounds.extents.x / 2 + 0.5f, bounds.center.y / bounds.extents.y / 2 + 0.5f);
+            _rectTransform.pivot = mainCamera.ScreenToWorldPoint(_handIdleIcon.pivot);
         }
         
         private void Update()
