@@ -61,10 +61,11 @@ namespace SquareDino.HandForCreatives
         private void SpawnHand()
         {
             var canvas = new GameObject("HandCanvas");
-            var handView = Instantiate(HandForCreativesUIStyleManager.handView);
+            //var handView = Instantiate(HandForCreativesUIStyleManager.handView);
+            Debug.Log(HandForCreativesUIStyleManager.handView);
             
             canvas.AddComponent<Canvas>();
-            handView.transform.SetParent(canvas.transform);
+            //handView.transform.SetParent(canvas.transform);
         }
 
         private void OnDisable()
