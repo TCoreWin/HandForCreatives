@@ -1,6 +1,6 @@
 using System.IO;
 
-namespace SquareDino.HandForCreatives
+namespace SquareDino.HFC
 {
     public static class HandForCreativesEditorUtility
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace SquareDino.HandForCreatives
+namespace SquareDino.HFC
 {
     public class HandView : MonoBehaviour
     {

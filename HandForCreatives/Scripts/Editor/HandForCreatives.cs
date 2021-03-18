@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace SquareDino.HandForCreatives
+namespace SquareDino.HFC
 {   
     public class HandForCreatives : EditorWindow
     {
@@ -61,11 +61,13 @@ namespace SquareDino.HandForCreatives
         private void SpawnHand()
         {
             var canvas = new GameObject("HandCanvas");
-            //var handView = Instantiate(HandForCreativesUIStyleManager.handView);
-            Debug.Log(HandForCreativesUIStyleManager.handView);
+            var mouseIcon = new GameObject("MouseIcon");
+            
+            Debug.Log(HandForCreativesUIStyleManager.hand_idle);
             
             canvas.AddComponent<Canvas>();
-            //handView.transform.SetParent(canvas.transform);
+            
+            var handView = mouseIcon.AddComponent<HandView>();
         }
 
         private void OnDisable()

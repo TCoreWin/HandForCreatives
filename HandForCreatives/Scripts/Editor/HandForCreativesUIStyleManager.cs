@@ -3,17 +3,19 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace SquareDino.HandForCreatives
+namespace SquareDino.HFC
 {
-    public class HandForCreativesUIStyleManager : MonoBehaviour
+    public static class HandForCreativesUIStyleManager
     {
-        public static Texture2D handView;
+        public static Sprite hand_idle;
+        public static Sprite hand_click;
 
         static HandForCreativesUIStyleManager()
         {
-            var tmproAssetFolderPath = HandForCreativesEditorUtility.packageRelativePath;
+            var hfcAssetFolderPath = HandForCreativesEditorUtility.packageRelativePath;
 
-            handView = AssetDatabase.LoadAssetAtPath(tmproAssetFolderPath + "/Editor Resources/HandView.png", typeof(Texture2D)) as Texture2D;
+            hand_idle = AssetDatabase.LoadAssetAtPath(hfcAssetFolderPath + "/Editor Resources/hand_idle.png", typeof(Sprite)) as Sprite;
+            hand_click = AssetDatabase.LoadAssetAtPath(hfcAssetFolderPath + "/Editor Resources/hand_click.png", typeof(Sprite)) as Sprite;
         }
     }
 }
